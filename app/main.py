@@ -1,19 +1,15 @@
+from flask import Response
+import time
 
-from flask import render_template, request
-from app.llm import get_sql_query
-from app.sql_executor import execute_sql, generate_plot
-
-@app.route('/ask', methods=['POST'])
-def ask_web():
-    question = request.form['question']
-    sql = get_sql_query(question)
-    df = execute_sql(sql)
-
-    should_plot = any(word in question.lower() for word in ["graph", "plot", "visual", "chart"])
-    image = generate_plot(df) if should_plot else None
-
-    return render_template("index.html", result=df.to_html(), image=image)
-
+@app.route('/stream')
+def stream():
+    def event_stream():
+        yield "data: Generating SQL...\n\n"
+        time.sleep(1)
+        yield "data: Running SQL on database...\n\n"
+        time.sleep(1)
+        yield "data: Done!\n\n"
+    return Response(event_stream(), mimetype='text/event-stream')
 
 # from flask import Flask, render_template, request
 # from app.llm import get_sql_query
