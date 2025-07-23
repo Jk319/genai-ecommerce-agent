@@ -1,36 +1,25 @@
-from flask import Response
-import time
-
-@app.route('/stream')
-def stream():
-    def event_stream():
-        yield "data: Generating SQL...\n\n"
-        time.sleep(1)
-        yield "data: Running SQL on database...\n\n"
-        time.sleep(1)
-        yield "data: Done!\n\n"
-    return Response(event_stream(), mimetype='text/event-stream')
 
 
-# from flask import Flask, render_template, request
-# from app.llm import get_sql_query
-# from app.sql_executor import execute_sql
 
-# app = Flask(__name__)
+from flask import Flask, render_template, request
+from app.llm import get_sql_query
+from app.sql_executor import execute_sql
 
-# @app.route('/', methods=['GET'])
-# def home():
-#     return render_template('index.html', answer=None, sql=None)
+app = Flask(__name__)
 
-# @app.route('/ask', methods=['POST'])
-# def ask_web():
-#     try:
-#         question = request.form['question']
-#         sql = get_sql_query(question)
-#         answer = execute_sql(sql)
-#         return render_template('index.html', answer=answer, sql=sql)
-#     except Exception as e:
-#         return render_template('index.html', answer=f"Error: {e}", sql=None)
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html', answer=None, sql=None)
+
+@app.route('/ask', methods=['POST'])
+def ask_web():
+    try:
+        question = request.form['question']
+        sql = get_sql_query(question)
+        answer = execute_sql(sql)
+        return render_template('index.html', answer=answer, sql=sql)
+    except Exception as e:
+        return render_template('index.html', answer=f"Error: {e}", sql=None)
 
 
 
