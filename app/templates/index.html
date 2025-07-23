@@ -8,6 +8,60 @@
 <body>
     <div class="container">
         <h1>Ask about Ecommerce Data</h1>
+        
+        <form method="post" action="/ask">
+            <input type="text" name="question" placeholder="Enter your question" required>
+            <button type="submit">Ask</button>
+        </form>
+
+        {% if sql %}
+        <div class="answer">
+            <h3>SQL Generated:</h3>
+            <p>{{ sql }}</p>
+        </div>
+        {% endif %}
+
+        {% if answer %}
+        <div class="answer">
+            <h3>Answer:</h3>
+            <p>{{ answer|safe }}</p>  <!-- allow HTML table -->
+        </div>
+        {% endif %}
+
+        {% if image %}
+        <div class="graph">
+            <h3>Graph</h3>
+            <img src="{{ image }}" alt="Generated Graph" style="max-width:100%;">
+        </div>
+        {% endif %}
+
+        <button onclick="startStream()">Stream Progress</button>
+        <div id="log" class="stream-log"></div>
+    </div>
+
+    <script>
+    function startStream() {
+        const eventSource = new EventSource("/stream");
+        eventSource.onmessage = function(e) {
+            const log = document.getElementById("log");
+            log.innerHTML += "<p>" + e.data + "</p>";
+        };
+    }
+    </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GenAI Ecommerce Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ask about Ecommerce Data</h1>
         <form method="post" action="/ask">
             <input type="text" name="question" placeholder="Enter your question" required>
             <button type="submit">Ask</button>
@@ -23,3 +77,4 @@
     </div>
 </body>
 </html>
+ -->
