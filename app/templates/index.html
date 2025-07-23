@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GenAI Ecommerce Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ask about Ecommerce Data</h1>
+        <form method="post" action="/ask">
+            <input type="text" name="question" placeholder="Enter your question" required>
+            <button type="submit">Ask</button>
+        </form>
+        {% if answer %}
+            <div class="answer">
+                <h3>SQL Generated:</h3>
+                <p>{{ sql }}</p>
+                <h3>Answer:</h3>
+                <p>{{ answer }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+flask
+pandas
+google-generativeai
+python-dotenv
+matplotlib
+# openai
