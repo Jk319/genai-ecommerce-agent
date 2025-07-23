@@ -1,5 +1,7 @@
 # 🛍️ GenAI Ecommerce Agent
 
+## Live WebLink - https://genai-ecommerce-agent.onrender.com
+
 A lightweight AI-powered web app that answers questions about your e-commerce data using natural language (like: “What is my total sales?”). It uses **OpenAI GPT** (or Google Gemini) to generate SQL from plain English, executes the query, and returns results from CSV data.
 
 ---
@@ -16,21 +18,37 @@ A lightweight AI-powered web app that answers questions about your e-commerce da
 ## 📂 Project Structure
 
 ├── run.py
+
 ├── requirements.txt
+
 ├── app/
+
 │ ├── init.py
+
 │ ├── db.py
+
 │ ├── llm.py
+
 │ ├── main.py
+
 │ ├── sql_executor.py
+
 │ ├── utils.py
+
 │ ├── static/
+
 │ │ └── style.css
+
 │ └── templates/
+
 │ └── index.html
+
 ├── data/
+
 │ ├── ad_sales.csv
+
 │ ├── eligibility.csv
+
 │ └── total_sales.csv
 
 
