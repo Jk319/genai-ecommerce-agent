@@ -24,7 +24,7 @@
         {% if answer %}
         <div class="answer">
             <h3>Answer:</h3>
-            <p>{{ answer|safe }}</p>  <!-- allow HTML table -->
+            <p>{{ answer|safe }}</p>  <!-- Safe for HTML table -->
         </div>
         {% endif %}
 
@@ -35,8 +35,11 @@
         </div>
         {% endif %}
 
-        <button onclick="startStream()">Stream Progress</button>
-        <div id="log" class="stream-log"></div>
+        <div class="stream-section">
+            <h3>Live Interaction</h3>
+            <button onclick="startStream()">Start Live Stream</button>
+            <div id="log" class="stream-log"></div>
+        </div>
     </div>
 
     <script>
@@ -52,7 +55,9 @@
 </html>
 
 
-<!-- <!DOCTYPE html>
+<!-- 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -77,4 +82,5 @@
     </div>
 </body>
 </html>
+
  -->
