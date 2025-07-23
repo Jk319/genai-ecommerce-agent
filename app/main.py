@@ -11,6 +11,7 @@ def stream():
         yield "data: Done!\n\n"
     return Response(event_stream(), mimetype='text/event-stream')
 
+
 # from flask import Flask, render_template, request
 # from app.llm import get_sql_query
 # from app.sql_executor import execute_sql
